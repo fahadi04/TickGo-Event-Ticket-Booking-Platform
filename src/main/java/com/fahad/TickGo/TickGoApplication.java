@@ -8,7 +8,7 @@ public class TickGoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TickGoApplication.class, args);
-System.out.println("TickGo is running...");
+		System.out.println("TickGo is running...");
 	}
 
 }
