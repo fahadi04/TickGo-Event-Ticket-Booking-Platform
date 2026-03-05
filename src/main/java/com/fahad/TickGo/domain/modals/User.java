@@ -1,4 +1,4 @@
-package com.fahad.TickGo.domain;
+package com.fahad.TickGo.domain.modals;
 
 import jakarta.persistence.*;
 import lombok.*;

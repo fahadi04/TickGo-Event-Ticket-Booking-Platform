@@ -1,6 +1,6 @@
 package com.fahad.TickGo.filters;
 
-import com.fahad.TickGo.domain.User;
+import com.fahad.TickGo.domain.modals.User;
 import com.fahad.TickGo.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -36,9 +36,10 @@ public class UserProvisioningFilter extends OncePerRequestFilter {
             UUID keycloakId = UUID.fromString(jwt.getSubject());
 
             if (!userRepository.existsById(keycloakId)) {
+
                 User user = new User();
                 user.setId(keycloakId);
-                user.setName(jwt.getClaims().get("preferred_username").toString());
+                user.setName(jwt.getClaimAsString("preferred_username"));
                 user.setEmail(jwt.getClaimAsString("email"));
 
                 userRepository.save(user);

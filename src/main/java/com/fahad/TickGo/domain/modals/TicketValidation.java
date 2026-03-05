@@ -1,8 +1,7 @@
-package com.fahad.TickGo.domain;
+package com.fahad.TickGo.domain.modals;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Columns;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 

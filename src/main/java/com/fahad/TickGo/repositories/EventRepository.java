@@ -1,11 +1,11 @@
 package com.fahad.TickGo.repositories;
 
-import com.fahad.TickGo.domain.modals.User;
+import com.fahad.TickGo.domain.modals.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface EventRepository extends JpaRepository<Event, UUID> {
 }
