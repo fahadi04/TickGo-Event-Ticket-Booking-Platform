@@ -1,6 +1,9 @@
 package com.fahad.TickGo.controllers;
 
 import com.fahad.TickGo.domain.dtos.ErrorDTO;
+import com.fahad.TickGo.exceptions.EventNotFoundException;
+import com.fahad.TickGo.exceptions.EventUpdateException;
+import com.fahad.TickGo.exceptions.TicketTypeNotFoundException;
 import com.fahad.TickGo.exceptions.UserNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -18,13 +21,37 @@ import java.util.List;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(EventUpdateException.class)
+    public ResponseEntity<ErrorDTO> handleEventUpdateException(EventUpdateException ex) {
+        log.error("Caught EventUpdateException", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("Unable to update event");
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler(TicketTypeNotFoundException.class)
+    public ResponseEntity<ErrorDTO> handleTicketTypeNotFoundException(TicketTypeNotFoundException ex) {
+        log.error("Caught TicketTypeNotFoundExceptions", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("Ticket type not found");
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EventNotFoundException.class)
+    public ResponseEntity<ErrorDTO> handleEventNotFoundException(EventNotFoundException ex) {
+        log.error("Caught EventNotFoundExceptions", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("Event not found");
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorDTO> handleUserNotFoundException(UserNotFoundException ex) {
         log.error("Caught UserNotFoundExceptions", ex);
         ErrorDTO errorDTO = new ErrorDTO();
         errorDTO.setError("User not found");
         return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
-
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
